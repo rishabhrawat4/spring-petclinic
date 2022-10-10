@@ -18,6 +18,8 @@ package org.springframework.samples.petclinic.owner;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
+
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -119,7 +121,9 @@ class OwnerController {
 		return "owners/ownersList";
 	}
 
+	@Cacheable(cacheNames = "owner", key = "#lastname")
 	private Page<Owner> findPaginatedForOwnersLastName(int page, String lastname) {
+		// System.out.println("I am here finding owner");
 		int pageSize = 5;
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
 		return owners.findByLastName(lastname, pageable);

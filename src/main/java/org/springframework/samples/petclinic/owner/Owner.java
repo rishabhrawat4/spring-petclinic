@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.owner;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ import org.springframework.util.Assert;
  */
 @Entity
 @Table(name = "owners")
-public class Owner extends Person {
+public class Owner extends Person implements Serializable {
 
 	@Column(name = "address")
 	@NotEmpty
