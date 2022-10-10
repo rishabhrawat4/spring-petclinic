@@ -156,3 +156,13 @@ The Spring PetClinic sample application is released under version 2.0 of the [Ap
 [spring-petclinic-graphql]: https://github.com/spring-petclinic/spring-petclinic-graphql
 [spring-petclinic-kotlin]: https://github.com/spring-petclinic/spring-petclinic-kotlin
 [spring-petclinic-rest]: https://github.com/spring-petclinic/spring-petclinic-rest
+
+
+MySQL setup:
+create a local databases, example: petclinic,
+create all the tables, src/main/resources/db/mysql/scheme.sql
+Give the privaleges, cmd: GRANT ALL PRIVILEGES ON . TO 'petclinic'@'%' WITH GRANT OPTION;
+flush all the privileges: FLUSH PRIVILEGES;
+Insert the DB url, username and password in application-mysql.properties
+
+run the webapp using this cmd: ./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
