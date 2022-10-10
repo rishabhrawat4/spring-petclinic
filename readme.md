@@ -159,10 +159,28 @@ The Spring PetClinic sample application is released under version 2.0 of the [Ap
 
 
 MySQL setup:
-create a local databases, example: petclinic,
-create all the tables, src/main/resources/db/mysql/scheme.sql
-Give the privaleges, cmd: GRANT ALL PRIVILEGES ON . TO 'petclinic'@'%' WITH GRANT OPTION;
-flush all the privileges: FLUSH PRIVILEGES;
-Insert the DB url, username and password in application-mysql.properties
+1. create a local databases, example: petclinic,
+2. create all the tables, src/main/resources/db/mysql/scheme.sql
+3. Give the privaleges, cmd: GRANT ALL PRIVILEGES ON . TO 'petclinic'@'%' WITH GRANT OPTION;
+4. flush all the privileges: FLUSH PRIVILEGES;
+5. Insert the DB url, username and password in application-mysql.properties
+    Example: 
+    <!--
+        database=mysql
+        spring.datasource.url=${MYSQL_URL:jdbc:mysql://localhost/petclinic}
+        spring.datasource.username=${MYSQL_USER:petclinic}
+        spring.datasource.password=${MYSQL_PASS:petclinic} 
+    -->
+6. run the webapp using this cmd: ./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
 
-run the webapp using this cmd: ./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
+Cacheing Setup:
+1. configure your cache in CacheConfiguration.java(i.e., add your cacheName)
+2. Add @Cachaeble("cacheNameExp") for which func we need to do cacheing.
+3. Set up the Redis Server.
+4. add this value in application.properties
+    spring.cache.type=redis
+    spring.redis.host=localhost
+    spring.redis.port=6379
+    spring.cache.redis.cache-null-values=true
+    spring.cache.redis.time-to-live=600000 (time in milliseconds)
+5. for monitoring the cacheing: run cmd: redis-cli monitor

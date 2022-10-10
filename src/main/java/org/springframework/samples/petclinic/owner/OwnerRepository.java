@@ -23,6 +23,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.cache.annotation.Cacheable;
 
 /**
  * Repository class for <code>Owner</code> domain objects All method names are compliant
@@ -53,6 +54,7 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	 * found)
 	 */
 
+	@Cacheable("owner")
 	@Query("SELECT DISTINCT owner FROM Owner owner left join  owner.pets WHERE owner.lastName LIKE :lastName% ")
 	@Transactional(readOnly = true)
 	Page<Owner> findByLastName(@Param("lastName") String lastName, Pageable pageable);

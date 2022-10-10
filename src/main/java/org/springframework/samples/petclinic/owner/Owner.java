@@ -45,7 +45,7 @@ import org.springframework.util.Assert;
  */
 @Entity
 @Table(name = "owners")
-public class Owner extends Person implements Serializable {
+public class Owner extends Person {
 
 	@Column(name = "address")
 	@NotEmpty

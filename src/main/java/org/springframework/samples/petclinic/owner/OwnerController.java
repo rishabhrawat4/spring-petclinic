@@ -121,7 +121,7 @@ class OwnerController {
 		return "owners/ownersList";
 	}
 
-	@Cacheable(cacheNames = "owner", key = "#lastname")
+	@Cacheable("owner")
 	private Page<Owner> findPaginatedForOwnersLastName(int page, String lastname) {
 		// System.out.println("I am here finding owner");
 		int pageSize = 5;
