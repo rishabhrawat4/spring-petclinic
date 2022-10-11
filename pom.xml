@@ -30,6 +30,10 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-mysql</artifactId>
+    </dependency>
     <!-- Spring and Spring Boot dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -226,6 +230,32 @@
           </generateGitPropertiesFilename>
           <failOnNoGitDirectory>false</failOnNoGitDirectory>
           <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <executions>
+            <execution>
+              <phase>generate-sources</phase>
+              <goals>
+                  <goal>migrate</goal>
+              </goals>
+            </execution>
+        </executions>
+        <configuration>
+            <driver>com.mysql.cj.jdbc.Driver</driver>
+            <url>jdbc:mysql://localhost:3306/petclinic</url>
+            <user>petclinic</user>
+            <password>petclinic</password>
+            <baselineOnMigrate>true</baselineOnMigrate>
+            <schemas>petclinic</schemas>
+            <locations>
+              <location>
+                  filesystem:src/main/resources/db/migration
+              </location>
+            </locations>
         </configuration>
       </plugin>
 
